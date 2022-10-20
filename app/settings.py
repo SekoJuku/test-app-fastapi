@@ -1,12 +1,15 @@
+import os
+
 from pydantic import BaseSettings
 
 
-class Settings(BaseSettings):
-    DATABASE_URL: str
+class Settings:
+    MONGO_URL: str
     MONGO_INITDB_DATABASE: str
 
-    class Config:
-        env_file = '.env'
+    def __init__(self):
+        self.MONGO_URL = os.getenv('MONGO_URL')
+        self.MONGO_INITDB_DATABASE = os.getenv('MONGO_INITDB_DATABASE')
 
 
 settings = Settings()
